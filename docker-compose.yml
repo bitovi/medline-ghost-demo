@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  mysql-master:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydb
+    volumes:
+      - ./master/data:/var/lib/mysql
+      - ./master/conf:/etc/mysql/conf.d
+    ports:
+      - "3306:3306"
+
+  mysql-slave:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydb
+    volumes:
+      - ./slave/data:/var/lib/mysql
+      - ./slave/conf:/etc/mysql/conf.d
+    ports:
+      - "3307:3306"
+
+volumes:
+  mysql-master-data:
+  mysql-slave-data:
+
