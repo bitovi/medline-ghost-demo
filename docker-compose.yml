@@ -7,8 +7,9 @@ services:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: mydb
     volumes:
-#      - ./master/data:/var/lib/mysql
+      - mysql-master-data:/var/lib/mysql
       - ./master/conf:/etc/mysql/conf.d
+      - ./master/user-create-and-seed.sql:/etc/mysql/user-create-and-seed.sql
     ports:
       - "3306:3306"
 
@@ -18,7 +19,7 @@ services:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: mydb
     volumes:
-#      - ./slave/data:/var/lib/mysql
+      - mysql-slave-data:/var/lib/mysql
       - ./slave/conf:/etc/mysql/conf.d
     ports:
       - "3307:3306"
