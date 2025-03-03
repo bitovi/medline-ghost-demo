@@ -1,0 +1,1 @@
+./gh-ost --alter="alter table users add column test varchar(200)" --database="mydb" --table="users" -debug -user root -password rootpassword --test-on-replica --host=0.0.0.0 --port=3308 --assume-master-host=0.0.0.0:3307 --cut-over=default --serve-socket-file=/tmp/gh-ost.test.sock --execute --initially-drop-ghost-table
