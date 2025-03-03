@@ -12,7 +12,7 @@ masterfile=$(docker exec -it $masterimg mysql -uroot -prootpassword -e "SHOW MAS
 masterposition=$(docker exec -it $masterimg mysql -uroot -prootpassword -e "SHOW MASTER STATUS\G" | awk '/Position/ {print $2}' | tr -d '\n' | tr -d '\r')
 
 
-configcommand=$(echo "CHANGE MASTER TO MASTER_HOST='$masterimg', MASTER_USER='replicator', MASTER_PASSWORD='replicatorpassword', MASTER_LOG_FILE='$masterfile', MASTER_LOG_POS=$masterposition, GET_MASTER_PUBLIC_KEY=1;")
+configcommand=$(echo "CHANGE MASTER TO MASTER_HOST='$masterimg', MASTER_USER='replicator', MASTER_PORT=3307, MASTER_PASSWORD='replicatorpassword', MASTER_LOG_FILE='$masterfile', MASTER_LOG_POS=$masterposition, GET_MASTER_PUBLIC_KEY=1;")
 
 
 # 3. configure slave for replication, with user from 1.
